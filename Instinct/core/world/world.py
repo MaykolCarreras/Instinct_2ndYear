@@ -1,9 +1,9 @@
 from __future__ import annotations
 from typing import TYPE_CHECKING
-from world.creatures import Creature
+from core.world.creatures import Creature
 
 if TYPE_CHECKING:
-    from world.cell import Cell
+    from core.world.cell import Cell
 
 class World:
     def __init__(self, width: int, height: int, grid:list[list[Cell]]) -> None:
@@ -12,6 +12,8 @@ class World:
         self.grid = grid
         self.ticks = 0
         self.creatures: list[Creature] = []
+        self.roars_previous_tick: list[tuple[int, int, str]] = []
+        self. roars_this_tick: list[tuple[int, int, str]] = []
         self.log_messages: list[str] = []
 
     def in_bounds(self, x: int, y: int) -> bool:

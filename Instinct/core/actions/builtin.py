@@ -1,13 +1,12 @@
 from __future__ import annotations
 from typing import TYPE_CHECKING
-from actions.base import Action
-from world.creatures import Creature
-from world.world import World
+from core.actions.base import Action
+from core.world.creatures import Creature
+from core.world.world import World
 
 if TYPE_CHECKING:
-    from world.world import World
-    from world.creatures import Creature
-    from ast.context import Value
+    from core.world.world import World
+    from core.world.creatures import Creature
 
 class MoveAction(Action):
     def apply (self, world, creature, args):
@@ -80,6 +79,7 @@ class RoarAction(Action):
 
         if not isinstance(text, str):
             raise RuntimeError("roar espera un texto")
+        world.roars_this_tick.append((creature.x, creature.y, text))
         world.log(f"{creature._species} ruge: {text}")
 
 
@@ -99,3 +99,14 @@ class WaitAction(Action):
         if not isinstance(n, int):
             raise RuntimeError("La acción 'Wait' espera un entero.")
         creature.wait_ticks = max(1, n) - 1
+
+
+ACTION_REGISTRY: dict[str, Action] = {
+    "wait": WaitAction(),
+    "move": MoveAction(),
+    "attack": AttackAction(),
+    "consume": ConsumeAction(),
+    "reproduce": ReproduceAction(),
+    "roar": RoarAction(),
+    "say": SayAction(),
+}

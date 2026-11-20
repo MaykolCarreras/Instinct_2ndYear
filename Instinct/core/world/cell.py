@@ -2,9 +2,9 @@ from __future__ import annotations
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
-    from world.terrain import Terrain
-    from world.object import Object
-    from world.creatures import Creature
+    from core.world.terrain import Terrain
+    from core.world.object import Object
+    from core.world.creatures import Creature
 
 class Cell:
     def __init__(self, terrain: Terrain) -> None:

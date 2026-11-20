@@ -1,12 +1,15 @@
 from __future__ import annotations
 from abc import ABC, abstractmethod
 from typing import TYPE_CHECKING
-from context import EvalContext, ExecStatus
+from core.nodes.context import EvalContext, ExecStatus
+from core.nodes.utils import is_truthy
 
 if TYPE_CHECKING:
-    from expressions import Expr, _truthy
+    from core.nodes.expressions import Expr
 
 class Instruction(ABC):
+    def __init__(self, line):
+        self.line = line
     @abstractmethod
     def execute(self, context:EvalContext)-> ExecStatus:
         ...
@@ -41,7 +44,7 @@ class If(Instruction):
         self.target = target
 
     def execute(self, context):
-        if _truthy(self.condition.eval(context)):
+        if is_truthy(self.condition.eval(context)):
             context.creature.pc = context.program.labels[self.target]
         else:
             context.creature.pc += 1
@@ -51,7 +54,8 @@ class If(Instruction):
         return f"If({self.condition!r}, {self.target!r})"
     
 class ActionCall(Instruction):
-    def __init__(self, name:str, args:list[Expr]):
+    def __init__(self, name:str, args:list[Expr], line: int = 0):
+        super().__init__(line)
         self.name = name
         self.args = args
 
@@ -59,7 +63,10 @@ class ActionCall(Instruction):
         action=context.action_registry.get(self.name)
         if action is None:
             raise RuntimeError(f"Acción desconocida: {self.name}")
-        args=[a.eval(context) for a in self.args]
+        try:
+            args=[a.eval(context) for a in self.args]
+        except Exception as e:
+            raise RuntimeError(f"{e}") from e
         action.apply(context.world, context.creature, args)
 
         context.creature.pc += 1

@@ -1,6 +1,7 @@
 from __future__ import annotations
 from abc import ABC, abstractmethod
-from context import EvalContext, Value
+from core.nodes.context import EvalContext, Value
+from core.nodes.utils import is_truthy
 
 class Expr(ABC):
     @abstractmethod
@@ -27,7 +28,7 @@ class Name(Expr):
             return context.creature.variables[self.name]
         #si es percepcion de la criatura
         if self.name in context.creature.perceptions:
-            return context.creature.variables[self.name]
+            return context.creature.perceptions[self.name]
         #si es una constante (NONE, GROUND, ALLY, ENEMY)
         if self.name in context.constants:
             return context.constants[self.name]
@@ -48,7 +49,7 @@ class UnaryOp(Expr):
                 raise RuntimeError(f"Menos unario espera un entero, recibio {type(v).__name__}")
             return -v
         if self.op == "not":
-            return 0 if _truthy(v) else 1
+            return 0 if is_truthy(v) else 1
         raise RuntimeError(f"Operador unario desconocido: {self.op}")
     
 class BinaryOp(Expr):
@@ -59,14 +60,14 @@ class BinaryOp(Expr):
 
     def eval(self, context):
         if self.op == "and":
-            if not _truthy(self.left.eval(context)):
+            if not is_truthy(self.left.eval(context)):
                 return 0
-            return 1 if _truthy(self.right.eval(context)) else 0
+            return 1 if is_truthy(self.right.eval(context)) else 0
         
         if self.op == "or":
-            if _truthy(self.left.eval(context)):
+            if is_truthy(self.left.eval(context)):
                 return 0
-            return 1 if _truthy(self.right.eval(context)) else 0
+            return 1 if is_truthy(self.right.eval(context)) else 0
         
         l=self.left.eval(context)
         r=self.right.eval(context)
@@ -97,6 +98,8 @@ class BinaryOp(Expr):
         if op == "<=": return 1 if l<=r else 0 # type: ignore
         if op == ">": return 1 if l>r else 0 # type: ignore
         if op == ">=": return 1 if l>=r else 0 # type: ignore
+        if op == "==": return 1 if l==r else 0
+        if op == "!=": return 1 if l!=r else 0
         raise RuntimeError(f"Operador binario desconocido: {op}")
     
     def __repr__(self):
@@ -116,13 +119,3 @@ class FunctionCall(Expr):
     
     def _repr__(self):
         return f"FunctionCall({self.name!r}, {self.args!r})"
-
-
-def _truthy(v: Value) -> bool:
-    if isinstance(v, bool):
-        return v
-    if isinstance(v, int):
-        return v!=0
-    if isinstance(v, str):
-        return v!=""
-    return True

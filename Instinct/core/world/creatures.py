@@ -3,8 +3,8 @@ from dataclasses import dataclass, field
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
-    from ast.program import Program
-    from ast.context import Value
+    from core.nodes.program import Program
+    from core.nodes.context import Value
 
 @dataclass
 class Creature:
@@ -20,7 +20,7 @@ class Creature:
     y: int
     #El estado del bichito
     health: int = field(init=False)
-    _age: int = 0
+    age: int = 0
     variables: dict[str, Value] = field(default_factory=dict)
     perceptions: dict[str, Value] = field(default_factory=dict)
     pc: int = 0
