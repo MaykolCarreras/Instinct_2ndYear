@@ -1,5 +1,5 @@
 from typing import TYPE_CHECKING
-from core.nodes.context import Value
+from Instinct.core.nodes.context import Value
 
 #Regla del lenguaje para valores verdaderos y falsos
 def is_truthy(v: Value) -> bool:

@@ -1,11 +1,11 @@
 from __future__ import annotations
 from abc import ABC, abstractmethod
 from typing import TYPE_CHECKING
-from core.nodes.context import EvalContext, ExecStatus
-from core.nodes.utils import is_truthy
+from Instinct.core.nodes.context import EvalContext, ExecStatus
+from Instinct.core.nodes.utils import is_truthy
 
 if TYPE_CHECKING:
-    from core.nodes.expressions import Expr
+    from Instinct.core.nodes.expressions import Expr
 
 class Instruction(ABC):
     def __init__(self, line):

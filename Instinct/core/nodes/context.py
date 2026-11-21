@@ -4,9 +4,9 @@ from enum import Enum
 from typing import TYPE_CHECKING   #esto es pa quitar las subrayas rojas cuando escribo, xq me sacan de quicio.
 
 if TYPE_CHECKING:
-    from core.world.world import World
-    from core.nodes.program import Program
-    from core.world.creatures import Creature
+    from Instinct.core.world.world import World
+    from Instinct.core.nodes.program import Program
+    from Instinct.core.world.creatures import Creature
 
 Value = int | str
 

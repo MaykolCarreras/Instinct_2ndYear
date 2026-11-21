@@ -2,9 +2,9 @@ from __future__ import annotations
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
-    from core.world.world import World
-    from core.world.creatures import Creature
-    from core.nodes.context import Value
+    from Instinct.core.world.world import World
+    from Instinct.core.world.creatures import Creature
+    from Instinct.core.nodes.context import Value
 
 def distance(x1: int, y1: int, x2: int, y2: int) -> int:
     return max(abs(x2-x1), abs(y2-y1))

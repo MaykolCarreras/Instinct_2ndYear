@@ -1,9 +1,9 @@
 from __future__ import annotations
 from typing import TYPE_CHECKING
-from core.simulation.interpreter import run_creature_turn
+from Instinct.core.simulation.interpreter import run_creature_turn
 
 if TYPE_CHECKING:
-    from core.world.world import World
+    from Instinct.core.world.world import World
 
 class SimulationEngine:
     def __init__(self, world: World, rng):

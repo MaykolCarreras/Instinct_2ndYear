@@ -3,8 +3,8 @@ from dataclasses import dataclass, field
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
-    from core.nodes.program import Program
-    from core.nodes.context import Value
+    from Instinct.core.nodes.program import Program
+    from Instinct.core.nodes.context import Value
 
 @dataclass
 class Creature:

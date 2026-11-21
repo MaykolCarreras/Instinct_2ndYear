@@ -1,13 +1,13 @@
 from __future__ import annotations
 from typing import TYPE_CHECKING
-from core.nodes.context import EvalContext, ExecStatus
-from core.actions.builtin import ACTION_REGISTRY
-from core.simulation.perceptions import compute_perceptions
-from core.simulation.functions import CONSTANTS, FUNCTION_REGISTRY
+from Instinct.core.nodes.context import EvalContext, ExecStatus
+from Instinct.core.actions.builtin import ACTION_REGISTRY
+from Instinct.core.simulation.perceptions import compute_perceptions
+from Instinct.core.simulation.functions import CONSTANTS, FUNCTION_REGISTRY
 
 if TYPE_CHECKING:
-    from core.world.world import World
-    from core.world.creatures import Creature
+    from Instinct.core.world.world import World
+    from Instinct.core.world.creatures import Creature
 
 MAX_LINES_PER_TURN = 100
 

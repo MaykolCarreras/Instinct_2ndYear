@@ -3,8 +3,8 @@ from abc import ABC, abstractmethod
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
-    from world.world import World
-    from world.creatures import Creature
+    from Instinct.core.world.world import World
+    from Instinct.core.world.creatures import Creature
 
 #Clase abstracta Action. Su función en la vida: existir, ser bonita y dejar que las demás acciones hereden de ella el 'contrato' apply.
 class Action (ABC):

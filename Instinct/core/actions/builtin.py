@@ -1,12 +1,12 @@
 from __future__ import annotations
 from typing import TYPE_CHECKING
-from core.actions.base import Action
-from core.world.creatures import Creature
-from core.world.world import World
+from Instinct.core.actions.base import Action
+from Instinct.core.world.creatures import Creature
+from Instinct.core.world.world import World
 
 if TYPE_CHECKING:
-    from core.world.world import World
-    from core.world.creatures import Creature
+    from Instinct.core.world.world import World
+    from Instinct.core.world.creatures import Creature
 
 class MoveAction(Action):
     def apply (self, world, creature, args):

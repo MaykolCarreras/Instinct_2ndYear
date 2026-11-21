@@ -1,7 +1,7 @@
 from __future__ import annotations
 from abc import ABC, abstractmethod
-from core.nodes.context import EvalContext, Value
-from core.nodes.utils import is_truthy
+from Instinct.core.nodes.context import EvalContext, Value
+from Instinct.core.nodes.utils import is_truthy
 
 class Expr(ABC):
     @abstractmethod

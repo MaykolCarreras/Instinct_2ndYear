@@ -1,12 +1,12 @@
 import random
-from core.nodes.expressions import Literal, Name, BinaryOp
-from core.nodes.instructions import ActionCall, Goto, If
-from core.nodes.program import Program
-from core.world.terrain import Terrain
-from core.world.cell import Cell
-from core.world.creatures import Creature
-from core.world.world import World
-from core.simulation.engine import SimulationEngine
+from Instinct.core.nodes.expressions import Literal, Name, BinaryOp
+from Instinct.core.nodes.instructions import ActionCall, Goto, If
+from Instinct.core.nodes.program import Program
+from Instinct.core.world.terrain import Terrain
+from Instinct.core.world.cell import Cell
+from Instinct.core.world.creatures import Creature
+from Instinct.core.world.world import World
+from Instinct.core.simulation.engine import SimulationEngine
 
 #Esto es pa testear que las cosas funcionan en consola antes de meterle mano a los cargadores, el analizador semantico y toda esa talla.
 

@@ -1,4 +1,4 @@
 # rock.ob
 object Rock
 char #
-resource_max100
+resource_max 100
